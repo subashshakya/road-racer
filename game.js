@@ -87,7 +87,7 @@ function showInstructions() {
 //--------------------------IMAGES---------------------------------------------------------------//
 //////////////////////////////////////////////////////////////////////////////////////////////////
 const carImage = new Image();
-carImage.src = "./img/car-4.png";
+carImage.src = "./img/car-1.png";
 
 const roadImage = new Image();
 roadImage.src = "./img/road.png";
@@ -96,10 +96,10 @@ const sideRoadImage = new Image();
 sideRoadImage.src = "./img/side-road.png";
 
 const obsImage = new Image();
-obsImage.src = "./img/obs-1.png";
+obsImage.src = "./img/car-2.png";
 
 const obsImage2 = new Image();
-obsImage2.src = "./img/obs-2.png";
+obsImage2.src = "./img/car-3.png";
 
 const bullet = new Image();
 bullet.src = "./img/bullet.png";
@@ -127,6 +127,9 @@ horn.src = "./sounds/horn.wav";
 
 const GO = new Audio();
 GO.src = "./sounds/about2end.wav";
+
+const DE = new Audio();
+DE.src = "./sounds/DE.mp3";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------RACING CAR-----------------------------------------------------------//
@@ -168,8 +171,8 @@ class RacingCar {
   }
 }
 
-const carWidth = 60,
-  carHeight = 80;
+const carWidth = 80,
+  carHeight = 100;
 
 let x = canvas.width / 2;
 let y = canvas.height / 2;
@@ -224,20 +227,20 @@ const shootBullet = (x, y) => {
 let obsX = 150;
 let obsY = 0;
 let obsVelocity = 3;
-const obsWidth = 50;
-const obsHeight = 80;
+const obsWidthC = 80;
+const obsHeightC = 80;
 
 let obstacleArr = [];
 
 const obstablePosition = () => {
-  let randomXvalue = obsX - obsHeight / 4 - Math.random() * (obsHeight / 2);
+  let randomXvalue = obsX - obsHeightC / 4 - Math.random() * (obsHeightC / 2);
 
   let obs1 = {
     obsImage: obsImage,
     obsX: randomXvalue,
     obsY: obsY,
-    obsWidth: obsWidth,
-    obsHeight: obsHeight,
+    obsWidth: obsWidthC,
+    obsHeight: obsHeightC,
     passed: false,
   };
 
@@ -264,8 +267,8 @@ const treeGeneration = () => {
     obsImage: tree,
     obsX: treeX,
     obsY: obsY,
-    obsWidth: obsWidth,
-    obsHeight: obsHeight,
+    obsWidth: obsWidthC,
+    obsHeight: obsHeightC,
     passed: false,
   };
 
@@ -273,14 +276,14 @@ const treeGeneration = () => {
 };
 
 const obstacleRandom = () => {
-  let randomX2 = obsX + 180 - obsWidth / 4 - Math.random() * (obsWidth / 2);
+  let randomX2 = obsX + 180 - obsWidthC / 4 - Math.random() * (obsWidthC / 2);
 
   let obs2 = {
     obsImage: obsImage2,
     obsX: randomX2,
     obsY: obsY,
-    obsWidth: obsWidth,
-    obsHeight: obsHeight,
+    obsWidth: obsWidthC,
+    obsHeight: obsHeightC,
     passed: false,
   };
 
@@ -452,6 +455,7 @@ const render = () => {
       for (let k = 0; k < bulletArr.length; k++) {
         let b = bulletArr[k];
         ctx.drawImage(bullet, b.x, b.y, b.width, b.height);
+
         b.y -= 5;
 
         if (hit(b, obs)) {
@@ -483,8 +487,8 @@ const render = () => {
         point.play();
         coinsArr.splice(i);
         coinCount++;
-        coinP.innerHTML = `Coins: ${coinCount}`;
-        // points.innerHTML = `Coins: ${coinCount}`;
+        coinP.innerHTML = `${coinCount}`;
+        points.innerHTML = `Coins: ${coinCount}`;
       }
     }
 
