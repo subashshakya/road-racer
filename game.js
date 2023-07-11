@@ -202,6 +202,7 @@ class Bullet {
   }
 
   shoot() {
+    // DE.play();
     this.y -= 10;
     this.drawBullet();
   }
@@ -455,7 +456,7 @@ const render = () => {
       for (let k = 0; k < bulletArr.length; k++) {
         let b = bulletArr[k];
         ctx.drawImage(bullet, b.x, b.y, b.width, b.height);
-
+        DE.play();
         b.y -= 5;
 
         if (hit(b, obs)) {
